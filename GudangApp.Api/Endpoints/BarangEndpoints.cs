@@ -41,6 +41,24 @@ public static class BarangEndpoints
       return Results.CreatedAtRoute(GetBarangEndpointName, new { kode = barang.Kode }, barang.ToBarangDetailsDto());
     });
 
+    // PUT /api/v1/barangs/:kode
+    group.MapPut("/{kode}", async (string kode, BarangUpdateDto updatedGame, GudangStoreContext dbContext) =>
+    {
+      var existingBarang = dbContext.Barangs.Find(kode);
+
+      if (existingBarang is null)
+      {
+        return Results.NotFound();
+      }
+
+      dbContext.Entry(existingBarang)
+      .CurrentValues
+      .SetValues(updatedGame.ToEntity(kode));
+      await dbContext.SaveChangesAsync();
+
+      return Results.NoContent();
+    });
+
     // DELETE /api/v1/barangs/:kode
     group.MapDelete("/{kode}", async (string kode, GudangStoreContext dbContext) =>
     {
