@@ -29,7 +29,12 @@ public static class GudangEndpoints
     });
 
     // GET /api/v1/gudangs/:kode
-    group.MapGet("/{kode}", (string kode) => Results.Ok("kode gudang")).WithName(GetGudangEndpointName);
+    group.MapGet("/{kode}", (string kode, GudangStoreContext dbContext) =>
+    {
+      Gudang? gudang = dbContext.Gudangs.Find(kode);
+
+      return gudang is null ? Results.NotFound() : Results.Ok(gudang.ToGudangDetailDto());
+    }).WithName(GetGudangEndpointName);
 
     // PUT /api/v1/gudangs/:kode
     group.MapPut("/{kode}", (string kode) => Results.Ok("put gudang"));
