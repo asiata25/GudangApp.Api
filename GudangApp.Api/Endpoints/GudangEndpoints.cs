@@ -1,13 +1,16 @@
 ﻿using GudangApp.Api.Data;
+using GudangApp.Api.Entities;
 using GudangApp.Api.Mapping;
 
 namespace GudangApp.Api.Endpoints;
 
 public static class GudangEndpoints
 {
+  const string GetGudangEndpointName = "GetGudang";
+
   public static RouteGroupBuilder MapGudangEndpoints(this WebApplication app)
   {
-    var group = app.MapGroup("api/v1/gudangs");
+    var group = app.MapGroup("api/v1/gudangs").WithParameterValidation();
 
     // GET /api/v1/gudangs
     group.MapGet("/", (GudangStoreContext dbContext) => dbContext
@@ -15,16 +18,24 @@ public static class GudangEndpoints
     .Select(gudang => gudang.ToGudangDetailDto()));
 
     // POST /api/v1/gudangs
-    group.MapPost("/", () => Results.Ok("membuat gudang"));
+    group.MapPost("/", (GudangCreateDto newGudang, GudangStoreContext dbContext) =>
+    {
+      Gudang gudang = newGudang.ToGudangEntity();
 
-    // GET /api/v1/gudangs/:id
-    group.MapGet("/{id}", (string id) => Results.Ok("id gudang"));
+      dbContext.Gudangs.Add(gudang);
+      dbContext.SaveChanges();
 
-    // PUT /api/v1/gudangs/:id
-    group.MapPut("/{id}", (string id) => Results.Ok("put gudang"));
+      return Results.CreatedAtRoute(GetGudangEndpointName, new { kode = gudang.Kode }, gudang.ToGudangDetailDto());
+    });
 
-    // DELETE /api/v1/gudangs/:id
-    group.MapDelete("/{id}", (string id) => Results.Ok("delete gudang"));
+    // GET /api/v1/gudangs/:kode
+    group.MapGet("/{kode}", (string kode) => Results.Ok("kode gudang")).WithName(GetGudangEndpointName);
+
+    // PUT /api/v1/gudangs/:kode
+    group.MapPut("/{kode}", (string kode) => Results.Ok("put gudang"));
+
+    // DELETE /api/v1/gudangs/:kode
+    group.MapDelete("/{kode}", (string kode) => Results.Ok("delete gudang"));
 
     return group;
   }
