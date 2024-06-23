@@ -2,7 +2,7 @@
 
 public class Gudang
 {
-  public required string Id { get; set; }
+  public string? Kode { get; set; }
 
   public required string Nama { get; set; }
 }

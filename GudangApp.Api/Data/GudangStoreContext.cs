@@ -11,8 +11,11 @@ public class GudangStoreContext(DbContextOptions<GudangStoreContext> options) : 
   {
     modelBuilder.Entity<Gudang>()
     .ToTable("gudang")
-    .Property(g => g.Id)
-    .HasColumnName("id");
+    .HasKey(g => g.Kode);
+
+    modelBuilder.Entity<Gudang>()
+    .Property(g => g.Kode)
+    .HasColumnName("kode");
 
     modelBuilder.Entity<Gudang>()
     .Property(g => g.Nama)
