@@ -14,33 +14,34 @@ public static class GudangEndpoints
     var group = app.MapGroup("api/v1/gudangs").WithParameterValidation();
 
     // GET /api/v1/gudangs
-    group.MapGet("/", (GudangStoreContext dbContext) => dbContext
+    group.MapGet("/", async (GudangStoreContext dbContext) => await dbContext
     .Gudangs
-    .Select(gudang => gudang.ToGudangDetailDto()));
+    .Select(gudang => gudang.ToGudangDetailDto())
+    .AsNoTracking().ToListAsync());
 
     // POST /api/v1/gudangs
-    group.MapPost("/", (GudangCreateDto newGudang, GudangStoreContext dbContext) =>
+    group.MapPost("/", async (GudangCreateDto newGudang, GudangStoreContext dbContext) =>
     {
       Gudang gudang = newGudang.ToEntity();
 
       dbContext.Gudangs.Add(gudang);
-      dbContext.SaveChanges();
+      await dbContext.SaveChangesAsync();
 
       return Results.CreatedAtRoute(GetGudangEndpointName, new { kode = gudang.Kode }, gudang.ToGudangDetailDto());
     });
 
     // GET /api/v1/gudangs/:kode
-    group.MapGet("/{kode}", (string kode, GudangStoreContext dbContext) =>
+    group.MapGet("/{kode}", async (string kode, GudangStoreContext dbContext) =>
     {
-      Gudang? gudang = dbContext.Gudangs.Find(kode);
+      Gudang? gudang = await dbContext.Gudangs.FindAsync(kode);
 
       return gudang is null ? Results.NotFound() : Results.Ok(gudang.ToGudangDetailDto());
     }).WithName(GetGudangEndpointName);
 
     // PUT /api/v1/gudangs/:kode
-    group.MapPut("/{kode}", (string kode, GudangUpdateDto updatedGudang, GudangStoreContext dbContext) =>
+    group.MapPut("/{kode}", async (string kode, GudangUpdateDto updatedGudang, GudangStoreContext dbContext) =>
     {
-      var existingGudang = dbContext.Gudangs.Find(kode);
+      var existingGudang = await dbContext.Gudangs.FindAsync(kode);
 
       if (existingGudang is null)
       {
@@ -50,15 +51,15 @@ public static class GudangEndpoints
       dbContext.Gudangs.Entry(existingGudang)
       .CurrentValues
       .SetValues(updatedGudang.ToEntity(kode));
-      dbContext.SaveChanges();
+      await dbContext.SaveChangesAsync();
 
       return Results.NoContent();
     });
 
     // DELETE /api/v1/gudangs/:kode
-    group.MapDelete("/{kode}", (string kode, GudangStoreContext dbContext) =>
+    group.MapDelete("/{kode}", async (string kode, GudangStoreContext dbContext) =>
     {
-      dbContext.Gudangs.Where(gudang => gudang.Kode == kode).ExecuteDelete();
+      await dbContext.Gudangs.Where(gudang => gudang.Kode == kode).ExecuteDeleteAsync();
 
       return Results.NoContent();
     });

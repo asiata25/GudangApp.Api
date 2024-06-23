@@ -10,6 +10,6 @@ var app = builder.Build();
 
 app.MapGudangEndpoints();
 
-app.MigrateDb();
+app.MigrateDbAsync();
 
 app.Run();
