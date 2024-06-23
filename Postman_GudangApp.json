@@ -1,0 +1,149 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "GudangApp",
+    "collectionId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+    "dateExported": "2024-06-23T16:46:19.923Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "3afcb9dc-6345-47e8-95c5-e0f71e9922f0",
+            "name": "Gudang",
+            "containerId": "",
+            "created": "2024-06-23T13:03:10.968Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "ddcb0d48-8ad0-4f4e-a2c1-4529ade0e0ee",
+            "name": "Barang",
+            "containerId": "",
+            "created": "2024-06-23T15:54:16.947Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "34bddfbd-7621-426d-accc-2476d89f793d",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "3afcb9dc-6345-47e8-95c5-e0f71e9922f0",
+            "name": "Get all gudang",
+            "url": "http://localhost:5001/api/v1/gudangs",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-23T13:03:00.453Z",
+            "modified": "2024-06-23T13:03:31.949Z",
+            "headers": []
+        },
+        {
+            "_id": "7d0c6c82-a544-41a2-b240-f3ec15fc0b2b",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "ddcb0d48-8ad0-4f4e-a2c1-4529ade0e0ee",
+            "name": "Get all barang",
+            "url": "http://localhost:5001/api/v1/barangs",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-23T15:54:16.947Z",
+            "modified": "2024-06-23T16:28:12.255Z",
+            "headers": []
+        },
+        {
+            "_id": "169e136e-ec18-4dde-819e-e6c94aef5ea2",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "3afcb9dc-6345-47e8-95c5-e0f71e9922f0",
+            "name": "Get gudang by ID",
+            "url": "http://localhost:5001/api/v1/gudangs/MC4pqC7HOEhqHwr3LS0nA",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-23T13:06:05.135Z",
+            "modified": "2024-06-23T14:46:02.662Z",
+            "headers": []
+        },
+        {
+            "_id": "c70e08ae-80d9-4afb-b630-229941f1f4fd",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "ddcb0d48-8ad0-4f4e-a2c1-4529ade0e0ee",
+            "name": "Get barang by ID",
+            "url": "http://localhost:5001/api/v1/barangs/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-23T15:54:16.948Z",
+            "modified": "2024-06-23T16:45:55.044Z",
+            "headers": []
+        },
+        {
+            "_id": "58f4430e-d1a7-455e-a366-7ddbbd8fcd9b",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "3afcb9dc-6345-47e8-95c5-e0f71e9922f0",
+            "name": "Create gudang",
+            "url": "http://localhost:5001/api/v1/gudangs",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-06-23T14:33:48.391Z",
+            "modified": "2024-06-23T16:11:08.014Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "32370a17-4aee-43d0-8348-b97c2fb9ac78",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "3afcb9dc-6345-47e8-95c5-e0f71e9922f0",
+            "name": "Delete gudang by ID",
+            "url": "http://localhost:5001/api/v1/gudangs/MC4pqC7HOEhqHwr3LS0nA",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-06-23T14:48:06.542Z",
+            "modified": "2024-06-23T14:48:25.002Z",
+            "headers": []
+        },
+        {
+            "_id": "bf7bedb4-c322-43dd-b1b2-09d09c2f330b",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "ddcb0d48-8ad0-4f4e-a2c1-4529ade0e0ee",
+            "name": "Create barang",
+            "url": "http://localhost:5001/api/v1/barangs",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-06-23T15:54:16.949Z",
+            "modified": "2024-06-23T16:21:34.925Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"madu\",\n  \"harga\": 25000,\n  \n  \"expired\": \"2026-01-01\",\n  \"kodeGudang\":\"d3RQlJwIZUWwZ/CPXC9gVw\" \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "1e40e54c-cc77-4ded-b875-4d115a242053",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "ddcb0d48-8ad0-4f4e-a2c1-4529ade0e0ee",
+            "name": "Delete barang by ID",
+            "url": "http://localhost:5001/api/v1/barangs/AjlSa8P60uhcpVKyp6r4g",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-06-23T15:54:16.950Z",
+            "modified": "2024-06-23T16:15:55.531Z",
+            "headers": []
+        },
+        {
+            "_id": "2a622191-076e-49cf-a600-d1dc5ae775b6",
+            "colId": "4df04ca8-d2c5-4965-80fd-8dc0265667ef",
+            "containerId": "3afcb9dc-6345-47e8-95c5-e0f71e9922f0",
+            "name": "Update gudang",
+            "url": "http://localhost:5001/api/v1/gudangs/HpMQIbb60iLIanRpXKREQ",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-06-23T14:57:30.965Z",
+            "modified": "2024-06-23T14:57:40.848Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"jakarta\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "SRQ-TXYyNWdBglU35tMsW3cVqY-5GDOQWfnTgahaeRVaBfOS2Lank02BAaxKDRYBQRF-oG0SP8RsjNWLX1IwXA"
+}
