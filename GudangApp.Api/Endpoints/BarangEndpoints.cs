@@ -16,8 +16,8 @@ public static class BarangEndpoints
     {
       Barang barang = newBarang.ToEntity();
 
-      dbContext.Barangs.Add(barang);
-      await dbContext.SaveChangesAsync();
+      await dbContext.Barangs.AddAsync(barang);
+      dbContext.SaveChanges();
 
       // TODO: refactor this to Result.CreatedWith...
       return Results.Ok();
