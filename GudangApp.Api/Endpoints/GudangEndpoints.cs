@@ -1,6 +1,7 @@
 ﻿using GudangApp.Api.Data;
 using GudangApp.Api.Entities;
 using GudangApp.Api.Mapping;
+using Microsoft.EntityFrameworkCore;
 
 namespace GudangApp.Api.Endpoints;
 
@@ -40,7 +41,12 @@ public static class GudangEndpoints
     group.MapPut("/{kode}", (string kode) => Results.Ok("put gudang"));
 
     // DELETE /api/v1/gudangs/:kode
-    group.MapDelete("/{kode}", (string kode) => Results.Ok("delete gudang"));
+    group.MapDelete("/{kode}", (string kode, GudangStoreContext dbContext) =>
+    {
+      dbContext.Gudangs.Where(gudang => gudang.Kode == kode).ExecuteDelete();
+
+      return Results.NoContent();
+    });
 
     return group;
   }
