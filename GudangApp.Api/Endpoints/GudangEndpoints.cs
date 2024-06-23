@@ -1,12 +1,18 @@
-﻿namespace GudangApp.Api.Endpoints;
+﻿using GudangApp.Api.Data;
+using GudangApp.Api.Mapping;
+
+namespace GudangApp.Api.Endpoints;
 
 public static class GudangEndpoints
 {
-  public static RouteGroupBuilder MapGudangEndpoints(this WebApplication app) {
+  public static RouteGroupBuilder MapGudangEndpoints(this WebApplication app)
+  {
     var group = app.MapGroup("api/v1/gudangs");
 
     // GET /api/v1/gudangs
-    group.MapGet("/", () => Results.Ok("semua gudang"));
+    group.MapGet("/", (GudangStoreContext dbContext) => dbContext
+    .Gudangs
+    .Select(gudang => gudang.ToGudangDetailDto()));
 
     // POST /api/v1/gudangs
     group.MapPost("/", () => Results.Ok("membuat gudang"));
