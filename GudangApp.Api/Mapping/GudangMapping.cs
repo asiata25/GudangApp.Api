@@ -1,5 +1,6 @@
 ﻿using GudangApp.Api.Dtos;
 using GudangApp.Api.Entities;
+using GudangApp.Api.Utils;
 
 namespace GudangApp.Api.Mapping;
 
@@ -7,12 +8,7 @@ public static class GudangMapping
 {
   public static Gudang ToEntity(this GudangCreateDto gudang)
   {
-    Guid g = Guid.NewGuid();
-    string GuidString = Convert.ToBase64String(g.ToByteArray());
-    GuidString = GuidString.Replace("=", "");
-    GuidString = GuidString.Replace("+", "");
-
-    return new() { Nama = gudang.Name, Kode = GuidString };
+    return new() { Nama = gudang.Name, Kode = GuidKey.GenerateNew() };
   }
 
   public static Gudang ToEntity(this GudangUpdateDto gudang, string kode)

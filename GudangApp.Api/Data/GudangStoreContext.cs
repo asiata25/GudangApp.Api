@@ -49,5 +49,10 @@ public class GudangStoreContext(DbContextOptions<GudangStoreContext> options) : 
     modelBuilder.Entity<Barang>()
     .Property(b => b.KodeGudang)
     .HasColumnName("kode_gudang");
+
+    modelBuilder.Entity<Barang>()
+    .HasOne(b => b.Gudang)
+    .WithMany()
+    .HasForeignKey(b => b.KodeGudang);
   }
 }

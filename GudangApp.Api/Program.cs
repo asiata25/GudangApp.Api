@@ -9,6 +9,7 @@ builder.Services.AddSqlite<GudangStoreContext>(connStr);
 var app = builder.Build();
 
 app.MapGudangEndpoints();
+app.MapBarangEndpoint();
 
 app.MigrateDbAsync();
 
