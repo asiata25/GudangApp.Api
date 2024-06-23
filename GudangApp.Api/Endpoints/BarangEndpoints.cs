@@ -23,9 +23,9 @@ public static class BarangEndpoints
     );
 
     // GET /api/v1/barangs/:kode
-    group.MapGet("/{kode}", async (int kode, GudangStoreContext dbContext) =>
+    group.MapGet("/{kode}", async (string kode, GudangStoreContext dbContext) =>
     {
-      Barang? barang = await dbContext.Barangs.FindAsync(kode);
+      Barang? barang = await dbContext.Barangs.Include(barang => barang.Gudang).FirstAsync(barang => barang.Kode == kode);
 
       return barang is null ? Results.NotFound() : Results.Ok(barang.ToBarangDetailsDto());
     }).WithName(GetBarangEndpointName);
