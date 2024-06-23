@@ -1,0 +1,7 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GudangApp.Api;
+
+public record class GudangUpdateDto(
+ [Required][StringLength(100)]  string Name
+);

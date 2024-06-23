@@ -21,7 +21,7 @@ public static class GudangEndpoints
     // POST /api/v1/gudangs
     group.MapPost("/", (GudangCreateDto newGudang, GudangStoreContext dbContext) =>
     {
-      Gudang gudang = newGudang.ToGudangEntity();
+      Gudang gudang = newGudang.ToEntity();
 
       dbContext.Gudangs.Add(gudang);
       dbContext.SaveChanges();
@@ -38,7 +38,22 @@ public static class GudangEndpoints
     }).WithName(GetGudangEndpointName);
 
     // PUT /api/v1/gudangs/:kode
-    group.MapPut("/{kode}", (string kode) => Results.Ok("put gudang"));
+    group.MapPut("/{kode}", (string kode, GudangUpdateDto updatedGudang, GudangStoreContext dbContext) =>
+    {
+      var existingGudang = dbContext.Gudangs.Find(kode);
+
+      if (existingGudang is null)
+      {
+        return Results.NotFound();
+      }
+
+      dbContext.Gudangs.Entry(existingGudang)
+      .CurrentValues
+      .SetValues(updatedGudang.ToEntity(kode));
+      dbContext.SaveChanges();
+
+      return Results.NoContent();
+    });
 
     // DELETE /api/v1/gudangs/:kode
     group.MapDelete("/{kode}", (string kode, GudangStoreContext dbContext) =>
