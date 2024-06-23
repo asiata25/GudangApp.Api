@@ -17,4 +17,9 @@ public static class BarangMapping
       KodeGudang = barang.KodeGudang
     };
   }
+
+  public static BarangDetailsDto ToBarangDetailsDto(this Barang barang)
+  {
+    return new(barang.Kode!, barang.Nama, barang.Harga, barang.Jumlah, barang.Expired, new(barang.Gudang!.Kode!, barang.Gudang.Nama));
+  }
 }
