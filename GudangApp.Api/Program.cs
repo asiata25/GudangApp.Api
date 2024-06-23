@@ -1,3 +1,4 @@
+using GudangApp.Api;
 using GudangApp.Api.Data;
 using GudangApp.Api.Endpoints;
 
@@ -8,5 +9,7 @@ builder.Services.AddSqlite<GudangStoreContext>(connStr);
 var app = builder.Build();
 
 app.MapGudangEndpoints();
+
+app.MigrateDb();
 
 app.Run();
